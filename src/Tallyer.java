@@ -83,7 +83,39 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
+      Map<String, Integer> myIdCounts = new HashMap<>();
+      Map<String, Integer> validIds = new HashMap<>();
+      Map<String, Integer> myTopicCounts = new HashMap<>();
 
-      return null;
+      for (String id : ids)
+      {
+        if (myIdCounts.containsKey(id))
+        {
+            myIdCounts.put(id, myIdCounts.get(id)+1);
+        } else {
+            myIdCounts.put(id, 1);
+        }
+      }
+
+      for (String id : myIdCounts.keySet())
+      {
+        if (myIdCounts.get(id) == 2)
+        {
+            validIds.put(id, myIdCounts.get(id));
+        }
+      }
+
+      for (String id : ids)
+      {
+        for (String topic : topics)
+        {
+            if (validIds.containsKey(id))
+            {
+                myTopicCounts.put(topic, validIds.get(id)+1);
+            }
+        }
+      }
+      
+      return myTopicCounts;
   }
 }
