@@ -86,34 +86,27 @@ public class Tallyer {
 
       // might have to reuse tallyTopics method from wave 1 here
 
-      Map<String, List<String>> mapOfFullResponses = new HashMap<>(); // this will store {StudentB, [maps, lists], StudentC, [loops]} etc.
+      Map<String, List<String>> myMap = new HashMap<>(); // this will store {StudentB, [maps, lists], StudentC, [loops]} etc.
 
       System.out.println("before: (nothing)");
 
-        List<String> idAppearsOnceList = new ArrayList<String>();
-        for (String id : ids)
-        {
-            if (!idAppearsOnceList.contains(id))
-            {
-                idAppearsOnceList.add(id);
-            }
-        }
-        System.out.println("id appears oncel ol: " + idAppearsOnceList);
+        System.out.println("my current map: " + myMap);
+        System.out.println("listofstudents: " + ids);
+        System.out.println("listofvotes: "+ topics);
 
+        List<String> validIds = new ArrayList<String>();
+      
+      System.out.println("after (map of ids and how many votes): " + tallyTopics(ids));
 
-
-      List<String> eachStudentVoteAsAList = new ArrayList<>();  // making list of the student voteNames ^ Q: how to make list for each student?
-
-      for (int i = 0; i<ids.size(); i++) // for each id/topic index of 0 (while its less than the size (7 for both))
+      for (String id : tallyTopics(ids).keySet())
       {
-        if (ids.contains(ids.get(i))) // if id exists and count is less than one
+        if (tallyTopics(ids).get(id) == 2)
         {
-            eachStudentVoteAsAList.add(topics.get(i)); // add "maps" to list voteForIds
-            mapOfFullResponses.put(ids.get(i), eachStudentVoteAsAList); // {"StudentA", ["maps"]} .. {"StudentA", ["maps", "lists"]}
+            validIds.add(id);
         }
       }
-      
-      System.out.println("after: " + mapOfFullResponses);
+      System.out.println("validdd: " + validIds);
       return null;
+
   }
 }
