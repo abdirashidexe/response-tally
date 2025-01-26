@@ -83,39 +83,27 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
-      Map<String, Integer> myIdCounts = new HashMap<>();
-      Map<String, Integer> validIds = new HashMap<>();
-      Map<String, Integer> myTopicCounts = new HashMap<>();
 
-      for (String id : ids)
-      {
-        if (myIdCounts.containsKey(id))
-        {
-            myIdCounts.put(id, myIdCounts.get(id)+1);
-        } else {
-            myIdCounts.put(id, 1);
-        }
-      }
+      // might have to reuse tallyTopics method from wave 1 here
+      
+      Map<String, List<String>> validIds = new HashMap<>(); // this will store {StudentB, [maps, lists], StudentC, [loops]} etc.
 
-      for (String id : myIdCounts.keySet())
-      {
-        if (myIdCounts.get(id) == 2)
-        {
-            validIds.put(id, myIdCounts.get(id));
-        }
-      }
+      System.out.println("before: (nothing)");
+      //for (String id : ids) -- dont use, since they have same index
 
-      for (String id : ids)
+      List<String> votesForId = new ArrayList<>();  // making list of the student voteNames ^ Q: how to make list for each student?
+      int count = 0; // to track if vote is valid (might not need to use)
+
+      for (int i = 0; i<ids.size(); i++) // for each id/topic index of 0 (while its less than the size (7 for both))
       {
-        for (String topic : topics)
+        if (ids.contains(ids.get(i))) // if id exists and count is less than one
         {
-            if (validIds.containsKey(id))
-            {
-                myTopicCounts.put(topic, validIds.get(id)+1);
-            }
+            votesForId.add(topics.get(i)); // add "maps" to list voteForIds
+            validIds.put(ids.get(i), votesForId); // {"StudentA", ["maps"]} .. {"StudentA", ["maps", "lists"]}
         }
       }
       
-      return myTopicCounts;
+      System.out.println("after: " + validIds);
+      return null;
   }
 }
