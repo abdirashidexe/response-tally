@@ -83,30 +83,35 @@ public class Tallyer {
     public static Map<String, Integer> tallyTopicsFiltered(List<String> ids, List<String> topics) {
       // WAVE 2
       // TODO: Implement this method
-
-      // might have to reuse tallyTopics method from wave 1 here
-
-      Map<String, List<String>> myMap = new HashMap<>(); // this will store {StudentB, [maps, lists], StudentC, [loops]} etc.
-
-      System.out.println("before: (nothing)");
-
-        System.out.println("my current map: " + myMap);
-        System.out.println("listofstudents: " + ids);
-        System.out.println("listofvotes: "+ topics);
+        System.out.println("");
+        Map<String, Integer> myMap = new HashMap<>(); // this will store {StudentB, [maps, lists], StudentC, [loops]} etc.
+        System.out.println("MyMap: " + myMap);
 
         List<String> validIds = new ArrayList<String>();
       
-      System.out.println("after (map of ids and how many votes): " + tallyTopics(ids));
+        System.out.println("tallyTopics(id): " + tallyTopics(ids));
 
-      for (String id : tallyTopics(ids).keySet())
-      {
-        if (tallyTopics(ids).get(id) == 2)
+        for (String id : tallyTopics(ids).keySet())
         {
-            validIds.add(id);
+            if (tallyTopics(ids).get(id) == 2)
+            {
+                validIds.add(id);
+            }
         }
-      }
-      System.out.println("validdd: " + validIds);
-      return null;
 
+        System.out.println("ValidIds (list): " + validIds);
+        System.out.println("example output: {maps=1, loops=1, arrays=1}");
+        for (int i=0; i < ids.size(); i++)
+        {
+            if (myMap.containsKey(ids.get(i)))
+            {
+                myMap.put(ids.get(i), myMap.get(ids.get(i))+1);
+            }
+            else
+            {
+                myMap.put(ids.get(i), 1);
+            }
+        }
+        return myMap;
   }
 }
