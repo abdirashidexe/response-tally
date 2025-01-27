@@ -84,12 +84,10 @@ public class Tallyer {
       // WAVE 2
       // TODO: Implement this method
         System.out.println("");
-        Map<String, Integer> myMap = new HashMap<>(); // this will store {StudentB, [maps, lists], StudentC, [loops]} etc.
-        System.out.println("MyMap: " + myMap);
-
+        Map<String, Integer> theirVotesMap = new HashMap<>();
         List<String> validIds = new ArrayList<String>();
       
-        System.out.println("tallyTopics(id): " + tallyTopics(ids));
+        //System.out.println("tallyTopics(id): " + tallyTopics(ids));
 
         for (String id : tallyTopics(ids).keySet())
         {
@@ -99,19 +97,29 @@ public class Tallyer {
             }
         }
 
-        System.out.println("ValidIds (list): " + validIds);
-        System.out.println("example output: {maps=1, loops=1, arrays=1}");
+        //System.out.println("ValidIds (list): " + validIds);
+        //System.out.println("example output: {maps=1, loops=1, arrays=1}");
+
+        Map<String, Integer> myMap = new HashMap<>(); // final map that will have the name of the votes and how many times
+        int count = 0;
         for (int i=0; i < ids.size(); i++)
         {
-            if (myMap.containsKey(ids.get(i)))
+            if (validIds.contains(ids.get(i)))
             {
-                myMap.put(ids.get(i), myMap.get(ids.get(i))+1);
-            }
-            else
-            {
-                myMap.put(ids.get(i), 1);
+                if (theirVotesMap.containsKey(ids.get(i)))
+                {
+                    theirVotesMap.put(ids.get(i), theirVotesMap.get(ids.get(i))+1);
+                    myMap.put(topics.get(i), count+1); // myMap.put(topics.get(i), myMap.get(topics.get(i));
+                }
+                else
+                {
+                    theirVotesMap.put(ids.get(i), 1);
+                    myMap.put(topics.get(i), 1);
+                    count = 1;
+                }
             }
         }
+        //System.out.println(theirVotesMap);
         return myMap;
   }
 }
